@@ -49,11 +49,9 @@ module.exports = {
     babel: {
         presets: ['react', 'es2015', 'stage-0'],
         plugins: ['react-hot-loader/babel', ['import', {
-                libraryName: 'antd',
-                style: 'css'
-            }]]
-            /* */
-
+            libraryName: 'antd',
+            style: 'css'
+        }]]
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('scripts/common.js'),
@@ -61,6 +59,9 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify('development')
             }
-        })
+        }),
+        new webpack.ProvidePlugin({
+            Promise: 'imports?this=>global!exports?global.Promise!es6-promise'
+        }) //promise polyfill
     ]
 }

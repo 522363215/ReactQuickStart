@@ -11,6 +11,7 @@ module.exports = {
     output: {
         filename: 'scripts/[name].js',
         path: path.join(__dirname, 'dist'),
+        publicPath: '/develop/'
     },
     resolve: {
         root: path.join(__dirname, 'src'),
@@ -24,7 +25,7 @@ module.exports = {
             exclude: path.join(__dirname, 'src/config')
         }, {
             test: /\.css$/,
-            loader: 'style!css'
+            loader: ExtractTextPlugin.extract('style', 'css?-url')
         }, {
             test: /\.(jpg|png|jpeg|bmp|gif)$/,
             loader: 'url-loader?limit=10240&name=images/[name].[ext]'
@@ -36,9 +37,9 @@ module.exports = {
     babel: {
         presets: ['react', 'es2015', 'stage-0'],
         plugins: ['react-hot-loader/babel', ['import', {
-                libraryName: 'antd',
-                style: 'css'
-            }]]
+            libraryName: 'antd',
+            style: 'css'
+        }]]
     },
     plugins: [
         new ExtractTextPlugin("styles/[name].css"),
@@ -52,6 +53,9 @@ module.exports = {
             compress: {
                 warnings: false
             }
-        })
+        }),
+        new webpack.ProvidePlugin({
+            Promise: 'imports?this=>global!exports?global.Promise!es6-promise'
+        }) //promise polyfill
     ]
 }
