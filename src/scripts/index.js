@@ -19,7 +19,6 @@ import App from './components/app';
 import {
   fetchApi
 } from './util/util';
-import '../styles/normalize.css';
 
 render(<AppContainer>
         <Provider store={store}>
@@ -32,8 +31,10 @@ if (module.hot) {
     const NextApp = require('./components/app').default;
     render(
       <AppContainer>
-            <Provider store={store}><NextApp /></Provider>
-             </AppContainer>,
+        <Provider store={store}>
+          <NextApp />
+        </Provider>
+       </AppContainer>,
       document.getElementById('root')
     );
   });

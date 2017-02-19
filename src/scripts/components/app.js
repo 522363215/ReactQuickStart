@@ -24,12 +24,18 @@ class App extends Component {
 		this.state = {};
 	}
 
+	componentDidMount() {
+
+	}
+
+	componentWillReceiveProps(nextProps) {
+
+	}
+
 	shouldComponentUpdate(nextProps, nextState) {
 		return !(this.props === nextProps || is(this.props, nextProps)) ||
 			!(this.state === nextState || is(this.state, nextState));
 	}
-
-	handleClick(names) {}
 
 	render() {
 		const {
